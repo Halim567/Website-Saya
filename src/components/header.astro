@@ -1,0 +1,103 @@
+---
+import { Icon } from 'astro-icon/components';
+import LogoHimauntika from '@assets/himauntika.webp';
+
+interface Props {
+    navigation: boolean;
+}
+
+const { navigation } = Astro.props;
+---
+
+<header class="relative z-50 bg-white flex items-center justify-around border py-2 max-lg:px-8 max-lg:justify-between">
+    <a href="/" class="flex items-center gap-4">
+        <img src={LogoHimauntika.src} loading="lazy" alt="Logo Himauntika" width={55} height={55} class="max-md:w-[45px]" />
+        <h1 class="font-Montserrat font-bold text-xl max-md:text-lg">HIMAUNTIKA</h1>
+    </a>
+    <nav class="flex items-center gap-16 max-lg:hidden">
+        {navigation && <ul class="flex items-center gap-8 font-Roboto">
+            <li id="profile" class="flex items-center gap-1 hover:text-gray-700">
+                Profil <Icon name="ri:arrow-down-s-line" size={25} id="rot" class="transition-all duration-300"/>
+                <div id="profile-menu" class="hidden absolute top-11">
+                    <ul class="bg-white shadow-lg flex flex-col gap-4 py-4 px-4" >
+                        <li>Visi Misi</li>
+                        <li>Struktur Organisasi</li>
+                        <li>Program Kerja</li>
+                    </ul>
+                </div>
+            </li>
+            <li id="divisi" class="flex items-center gap-1 hover:text-gray-700">
+                Divisi <Icon name="ri:arrow-down-s-line" size={25} id="rot-2" class="transition-all duration-300"/>
+                <div id="divisi-menu" class="hidden absolute top-11">
+                    <ul class="bg-white shadow-lg flex flex-col gap-4 py-4 px-4" >
+                        <li><a href="/divisi-pendidikan">Pendidikan</a></li>
+                        <li>Humas</li>
+                        <li>Kaderisasi</li>
+                        <li>Aset dan Logistik</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="hover:text-gray-700">Pendaftaran</li>
+        </ul>}
+        
+        <ul class="flex items-center gap-6 text-xl">
+            <li><a href="https://www.instagram.com/himauntika_unis?igsh=cGczeWJwc2Y3OHk=" class="hover:text-gray-700"><Icon name="ri:instagram-line" size={30}/></a></li>
+            <li><a href="https://www.facebook.com/himauntika.himauntika.7?mibextid=ZbWKwL" class="hover:text-gray-700"><Icon name="ri:facebook-box-fill" size={30}/></a></li>
+            <li><a href="https://www.tiktok.com" class="hover:text-gray-700"><Icon name="ri:tiktok-fill" size={30}/></a></li>
+        </ul>
+    </nav>
+
+    <button id="btn-sidebar" type="button" class="text-xl hidden max-lg:block">
+        <Icon name="fa6-solid:bars" class=""/>
+        <span class="sr-only">toggleMenu</span>
+    </button>
+</header>
+
+<script>
+    import { ToggleSidebar } from "@state";
+
+    const button = document.querySelector<HTMLButtonElement>('#btn-sidebar');
+
+    button?.addEventListener('click', () => {
+        ToggleSidebar.set(!ToggleSidebar.get());
+    });
+
+    function HoverMenu(elementId: string, target: string, iconId?: string) {
+        const element = document.getElementById(elementId);
+
+        if (!element) {
+            console.error(`Element with id ${elementId} not found`);
+            return;
+        }
+
+        element.addEventListener('pointerenter', () => {
+            document.getElementById(target)?.classList.remove('hidden');
+
+            if (!iconId) return;
+
+            document.getElementById(iconId)?.classList.add('rotate-180');
+        });
+
+        element.addEventListener('pointerleave', () => {
+            document.getElementById(target)?.classList.add('hidden');
+
+            if (!iconId) return;
+
+            document.getElementById(iconId)?.classList.remove('rotate-180');
+        });
+    }
+
+    HoverMenu('profile', 'profile-menu', 'rot');
+    HoverMenu('divisi', 'divisi-menu', 'rot-2');
+
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 0) {
+            header?.classList.add('shadow-md', 'sticky', 'top-0');
+
+            return;
+        }
+
+        header?.classList.remove('shadow-md', 'sticky', 'top-0');
+    });
+</script>

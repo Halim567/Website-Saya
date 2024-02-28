@@ -1,0 +1,29 @@
+---
+import Headers from '@components/header.astro';
+import Footer from '@components/footer.astro';
+import BtnToTop from '@components/back-to-top.astro';
+import Layout from '@layouts/layout.astro';
+import Sidebar from '@components/sidebar.astro';
+import Hero from '@components/hero.astro';
+
+import PenjelasanHimauntika from '@content/home/pengertian.astro';
+import VisiMisiHimauntika from '@content/home/visi-misi-tujuan.astro';
+import DivisiHimauntika from '@content/home/divisi.astro';
+import FotoPengurus from '@content/home/foto-pengurus.astro';
+---
+
+<Layout title='Himauntika 2024 🔥' description='WebSite Resmi Himauntika UNIS Tangerang'>
+    <Headers navigation={true}/>
+    <Hero/>
+    <Sidebar />
+
+    <main class="flex flex-col gap-24 pt-8 pb-24 px-[15%] max-lg:px-[4%]">
+        <PenjelasanHimauntika />
+        <VisiMisiHimauntika />
+        <DivisiHimauntika />
+        <FotoPengurus />
+    </main>
+    <Footer/>
+
+    <BtnToTop/>
+</Layout>

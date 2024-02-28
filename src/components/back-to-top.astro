@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button id="btn-to-top" class="btn-to-top">
+    <Icon name="mdi:arrow-up" size={25} />
+    <span class="sr-only">top</span>
+</button>
+
+<style>
+    .btn-to-top {
+        @apply opacity-0
+            translate-y-full pointer-events-none fixed bottom-[50px] right-[75px] w-[45px] h-[45px] 
+            bg-white rounded-full cursor-pointer hover:bg-slate-100 flex items-center justify-center 
+            shadow-cover text-black transition-all duration-300 max-md:right-[8%] max-md:bottom-[6%];
+    }
+
+    .btn-to-top-show{
+        @apply opacity-100 translate-y-0 pointer-events-auto;
+    }
+</style>
+
+<script>
+    const btnToTop = document.getElementById('btn-to-top') as HTMLButtonElement;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 0) {
+            btnToTop.classList.add('btn-to-top-show');
+            return;
+        }
+
+        btnToTop.classList.remove('btn-to-top-show');
+    });
+
+    btnToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>

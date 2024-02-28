@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<aside class="fixed z-40 top-[3.6rem] bg-white h-screen pt-8 -translate-x-full transition-all duration-300 ease-in-out shadow-right max-lg:w-3/4">
+    <nav class="font-Roboto pl-8 pr-8 flex flex-col gap-6">
+        <ul class="flex items-center gap-6 text-xl">
+            <li><a href="https://www.instagram.com/himauntika_unis?igsh=cGczeWJwc2Y3OHk=" class="hover:text-gray-700"><Icon name="ri:instagram-line" size={30}/></a></li>
+            <li><a href="https://www.facebook.com/himauntika.himauntika.7?mibextid=ZbWKwL" class="hover:text-gray-700"><Icon name="ri:facebook-box-fill" size={30}/></a></li>
+            <li><a href="https://www.tiktok.com" class="hover:text-gray-700"><Icon name="ri:tiktok-fill" size={30}/></a></li>
+        </ul>
+        <div>
+            <button id="profile-btn" class="font-bold text-xl w-full flex items-center justify-between">Profile <Icon name="ri:arrow-down-s-line" size={25} id="rot-profile-sb" class="transition-all duration-300"/></button>
+            <ul id="profile-menu-sb" class="h-0 flex flex-col gap-4 pt-3 pl-3 overflow-hidden transition-all duration-300">
+                <li><a href="/sejarah">Sejarah</a></li>
+                <li><a href="/visi-misi">Visi Misi</a></li>
+                <li><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+            </ul>
+        </div>
+        <div>
+            <button id="divisi-btn" class="font-bold text-xl w-full flex items-center justify-between">Divisi <Icon name="ri:arrow-down-s-line" size={25} id="rot-divisi-sb" class="transition-all duration-300"/></button>
+            <ul id="divisi-menu-sb" class="h-0 flex flex-col gap-4 pt-3 pl-3 overflow-hidden transition-all duration-300">
+                <li><a href="/divisi-pendidikan">Divisi Pendidikan</a></li>
+                <li><a href="/divisi-humas">Divisi Humas</a></li>
+                <li><a href="/divisi-kaderisasi">Divisi Kaderisasi</a></li>
+                <li><a href="/divisi-aset">Divisi Aset dan Logistik</a></li>
+            </ul>
+        </div>
+        <a href="/pendaftaran" class="font-bold text-xl">Pendaftaran</a>
+    </nav>
+</aside>
+
+<script>
+    import { ToggleSidebar } from '@state';
+
+    const sidebar = document.querySelector('.fixed');
+
+    ToggleSidebar.subscribe(v => {
+        if (v) {
+            sidebar?.classList.remove('-translate-x-full');
+            return;
+        }
+        
+        sidebar?.classList.add('-translate-x-full');
+    });
+
+    function toggleMenu (buttonId: string, menuId: string, rotId: string, height: string) {
+        const button = document.getElementById(buttonId) as HTMLButtonElement;
+        let toggle = false;
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                toggle = false;
+                document.getElementById(menuId)?.classList.remove(height);
+                document.getElementById(menuId)?.classList.add('h-0');
+                document.getElementById(rotId)?.classList.remove('rotate-180');
+
+                ToggleSidebar.set(false);
+
+                console.log(window.innerWidth);
+            }
+        });
+
+        button?.addEventListener('click', () => {
+            toggle = !toggle;
+
+            if (toggle) {
+                document.getElementById(menuId)?.classList.remove('h-0');
+                document.getElementById(menuId)?.classList.add(height);
+                document.getElementById(rotId)?.classList.add('rotate-180');
+                return;
+            }
+
+            document.getElementById(menuId)?.classList.remove(height);
+            document.getElementById(menuId)?.classList.add('h-0');
+            document.getElementById(rotId)?.classList.remove('rotate-180');
+        });
+    }
+
+    toggleMenu('profile-btn', 'profile-menu-sb', 'rot-profile-sb', 'h-[128px]');
+    toggleMenu('divisi-btn', 'divisi-menu-sb', 'rot-divisi-sb', 'h-[156px]');
+</script>

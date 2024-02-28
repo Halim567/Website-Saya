@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import Testing from '@assets/test.webp';
+
+const members = [
+    { name: 'Asyhari Hasim', role: 'Ketua Himpunanan' },
+    { name: 'Aldi Wahyu Buana', role: 'Wakil Ketua Himpunanan' },
+    { name: 'Alfiana Tiara Putri', role: 'Sekretaris' },
+    { name: 'Siti Aisyah', role: 'Bendahara' },
+    { name: 'Revan Al Azhar', role: 'koordinasi Divisi' },
+    { name: 'Halim Anja Kalasha', role: 'koordinasi Divisi Pendidikan' },
+    { name: 'Rani Anggaraani', role: 'koordinasi Divisi Humas' },
+    { name: 'Dimas Dwi Saputra', role: 'koordinasi Divisi Kaderisasi' },
+    { name: 'Nahda Meira', role: 'koordinasi Divisi Aset dan Logistik' }
+];
+---
+
+<div class="flex flex-col gap-6 items-center justify-center">
+    <h1 class="font-Montserrat text-center text-2xl font-bold max-md:text-xl">KEPENGURUSAN</h1>
+    <p class="text-center font-Roboto max-md:text-sm">Pengurus HIMAUNTIKA bertanggung jawab untuk mengelola dan mengkoordinasikan berbagai aspek pendidikan, penelitian, dan pengabdian masyarakat di dalam Himpunan.</p>
+    <div class="grid grid-cols-3 gap-28 max-sm:grid-cols-1 max-md:grid-cols-2">
+        {members.map(value => (
+            <div class="flex flex-col gap-4 w-fit">
+                <Image src={Testing} alt="Testing" format="avif" quality="mid" class="max-lg:w-[500px] rounded-md"/>
+                <div>
+                    <h2 class="font-bold font-Montserrat max-md:text-md">{value.name}</h2>
+                    <p class="font-Roboto text-sm">{value.role}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</div>

@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+
+import DivisiPendidikan from '@assets/div-pendidikan.jpg';
+import DivisiHumas from '@assets/div_humas.png';
+import DivisiKaderisasi from '@assets/div_kader.png';
+import DivisiAset from '@assets/div-aset.jpg';
+
+const DivisiHimauntika = [
+    {
+        title: 'Divisi Pendidikan',
+        deskripsi: 'Divisi Pendidikan dan Penelitian menjadi salah satu entitas terpenting dalam menunjang pembinaan intelektual mahasiswa. Divisi ini memfokuskan upayanya pada penyelenggaraan program-program pendidikan tambahan, penelitian, serta pembinaan ilmiah. Mereka mengorganisir seminar, workshop, dan diskusi ilmiah untuk melengkapi pengetahuan yang diperoleh di dalam ruang kelas dan meningkatkan keterampilan riset mahasiswa. Divisi Pendidikan dan Penelitian juga mendukung peningkatan mutu riset dan publikasi ilmiah dalam lingkup mahasiswa Teknik Informatika.',
+        image: DivisiPendidikan,
+        imageAlt: 'Divisi Pendidikan'
+    },
+    {
+        title: 'Divisi Humas',
+        deskripsi: 'Divisi Humas di Himpunan Mahasiswa Jurusan Teknik Informatika (HIMAUNTIKA) memiliki peran integral dalam menjaga hubungan baik dengan berbagai pihak terkait, baik itu internal maupun eksternal. Divisi ini bertanggung jawab atas manajemen komunikasi organisasi, yang meliputi penyampaian informasi yang tepat, promosi acara, serta menjaga citra positif HIMAUNTIKA.',
+        image: DivisiHumas,
+        imageAlt: 'Divisi Humas'
+    },
+    {
+        title: 'Divisi Kaderisasi',
+        deskripsi: 'Divisi Kaderisasi di Himpunan Mahasiswa Jurusan Teknik Informatika (HIMAUNTIKA) memiliki peran krusial dalam pengembangan kualitas mahasiswa dan pengelolaan bakat potensial mereka. Divisi ini menjadi garda terdepan dalam membentuk karakter, kemampuan kepemimpinan, dan keterampilan yang diperlukan bagi mahasiswa Teknik Informatika. Mereka mengelola program-program pengembangan diri yang meliputi pelatihan keterampilan, peningkatan soft skill, serta pembinaan kepemimpinan.',
+        image: DivisiKaderisasi,
+        imageAlt: 'Divisi Kaderisasi'
+    },
+    {
+        title: 'Divisi Aset dan Logistik',
+        deskripsi: 'Divisi Peralatan di Himpunan Mahasiswa Jurusan Teknik Informatika (HIMAUNTIKA) Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis autem doloremque sed distinctio, pariatur id. Earum ab aut, praesentium ad repellat et tempora nesciunt doloremque, delectus suscipit explicabo dolore libero sint iure rerum saepe ratione voluptatem voluptatibus! Sed, impedit doloremque enim voluptatem ipsam sunt accusantium nemo, vero tenetur reprehenderit fugiat?.',
+        image: DivisiAset,
+        imageAlt: 'Divisi Aset dan Logistik'
+    }
+];
+---
+
+<div class="flex flex-col gap-6 max-sm:gap-12">
+    <h1 class="font-Montserrat text-2xl font-bold text-center">DIVISI HIMAUNTIKA</h1>
+    <p class="text-justify font-Roboto">Himpunan Mahasiswa Jurusan Teknik Informatika (HIMAUNTIKA) adalah organisasi mahasiswa yang memegang peran krusial dalam memajukan lingkungan akademik dan non-akademik bagi para mahasiswa. Divisi-divisi di dalam HIMAUNTIKA memainkan peran penting dalam menjalankan kegiatan organisasi, memfasilitasi kebutuhan mahasiswa, serta menyediakan platform untuk pengembangan keilmuan, soft skill, dan kreativitas.</p>
+    {DivisiHimauntika.map((value, index) => (
+        <div class={`flex items-center ${index % 2 === 0 ? '' : 'flex-row-reverse'} gap-12 max-md:flex-col max-md:gap-4`}>
+            <h1 class="hidden font-Montserrat text-center font-bold text-xl max-md:block">{value.title}</h1>
+            <Image src={value.image} alt={value.imageAlt} format='avif' quality='low' class="hidden w-[350px] rounded-md max-md:block border"/>
+            <div class="flex flex-col gap-4">
+                <h1 class="font-Montserrat font-bold text-xl max-md:hidden">{value.title}</h1>
+                <p class="text-justify font-Roboto">{value.deskripsi} <a href="/div-pendidikan" class="hidden max-md:block underline">Baca Selengkapnya</a></p>
+                <a href="/div_pend" class="a-btn max-md:hidden bg-blue-500 w-fit px-4 py-2 text-white rounded hover:bg-blue-700">Baca Selengkapnya</a>
+            </div>
+            <Image src={value.image} alt={value.imageAlt} format='avif' quality='low' class="w-[350px] rounded-md max-md:hidden border"/>
+        </div>
+    ))}
+</div>
